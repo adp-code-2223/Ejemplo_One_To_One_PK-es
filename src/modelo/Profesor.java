@@ -68,4 +68,12 @@ public class Profesor implements java.io.Serializable {
 		this.tipoFuncionario = tipoFuncionario;
 	}
 
+	@Override
+	public String toString() {
+		return "Profesor [id=" + id + ", nombre=" + nombre + ", ape1=" + ape1 + ", ape2=" + ape2 + ", tipoFuncionario="
+				+ tipoFuncionario + "]";
+	}
+	
+	
+
 }
