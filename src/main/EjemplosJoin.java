@@ -18,7 +18,7 @@ public class EjemplosJoin {
 		Session session = sessionFactory.openSession();
 		
 		{
-			System.out.println("-----------Q1: Uso de cross join: Cada fila de una tabla combinada con todas las filas de la otra tabla -----------");
+			System.out.println("----------- Q1: Uso de cross join: Cada fila de una tabla combinada con todas las filas de la otra tabla -----------");
 
 			List<Object[]> datos = session.createQuery(
 					" select p.nombre, p.ape1, p.ape2, m.nombre FROM Profesor p, Modulo m ")
