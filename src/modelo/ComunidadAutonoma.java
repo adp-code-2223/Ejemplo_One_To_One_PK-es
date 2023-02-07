@@ -51,4 +51,12 @@ public class ComunidadAutonoma implements java.io.Serializable {
 		this.provincias = provincias;
 	}
 
+	public void addProvincia(Provincia prov) {
+
+		getProvincias().add(prov); // uso de getProvincias() en lugar de this.provincias para forzar inicialización
+									// del proxy
+		prov.setComunidadAutonoma(this);
+
+	}
+
 }

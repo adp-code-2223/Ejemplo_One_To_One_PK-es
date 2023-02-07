@@ -12,6 +12,15 @@
         <property name="hibernate.hbm2ddl.auto">none</property>
         <property name="hibernate.search.autoregister_listeners">true</property>
         <property name="hibernate.validator.apply_to_ddl">false</property>
+        
+        
+        <property name="hibernate.show_sql">true</property>
+
+		<property name="hibernate.format_sql">true</property>
+
+		<property name="hibernate.use_sql_comments">true</property>
+		
+        
         <mapping resource="modelo/Direccion.hbm.xml"/>
         <mapping resource="modelo/Profesor.hbm.xml"/>
         <mapping resource="modelo/ComunidadAutonoma.hbm.xml"/>

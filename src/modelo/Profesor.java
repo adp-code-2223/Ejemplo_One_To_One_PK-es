@@ -87,4 +87,15 @@ public class Profesor implements java.io.Serializable {
 		this.modulos = modulos;
 	}
 
+	public void addModulo(Modulo mod) {
+
+		getModulos().add(mod);
+
+		// conviene usar getModulos() en lugar de this.modulos para forzar las
+		// inicializaciones de los objetos proxy en caso de inicialización //lazy
+
+		mod.getProfesors().add(this);
+
+	}
+
 }
