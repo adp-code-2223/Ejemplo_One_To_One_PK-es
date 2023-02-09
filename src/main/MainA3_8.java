@@ -19,7 +19,7 @@ public class MainA3_8 {
 		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 
-		 //crearModuloProfeNuevos(session);
+		 crearModuloProfeNuevos(session);
         //eliminarComunidad(session, 19); // borrado de Melilla como CA
 		
 		crearComunidadYProvincias(session);

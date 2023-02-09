@@ -8,8 +8,7 @@ import util.SessionFactoryUtil;
 import modelo.ContactInfo;
 import modelo.Profesor;
 
-import java.util.List;
-import java.util.Set;
+
 
 public class OneToOne {
 	public static void main(String[] args) {
@@ -19,75 +18,97 @@ public class OneToOne {
 
 		 //addMoreThanOneContactInfoToProfesor(session, 1);
 
-		addMoreThanOneContactInfoToProfesorFromContactInfo(session, 1);
-
+		//updateContactInfoToProfesor(session, 1);
 		session.close();
 		sessionFactory.close();
 
 	}
 
-	private static void addMoreThanOneContactInfoToProfesor(Session session, int profeId) {
+	/*Lanzará una excepción
+	*Ha ocurrido una excepción: A different object with the same identifier value was already associated with the session : [modelo.ContactInfo#1]
+	org.hibernate.NonUniqueObjectException:
+	*/
+	private static void addNewContactInfoToProfesor(Session session, int profeId) {
 		Transaction tx = null;
 
 		Profesor profe = (Profesor) session.createQuery("SELECT p FROM Profesor p where p.id = :id")
 				.setParameter("id", profeId).uniqueResult();
 
-		Set<ContactInfo> info = profe.getContactInfos();
-		for (ContactInfo contactInfo : info) {
-			System.out.println("Profe: " + profe.getId() + " Contact info: " + contactInfo);
+		//info está asociado a la sesión con pk=1
+		ContactInfo info =  profe.getContactInfo();
+		if(info!=null) {
+			System.out.println("Profe: " + profe.getId() + " Contact info: " + info);
 		}
+		
 
+		//creo cInfoNueva, estado transient
 		ContactInfo cInfoNueva = new ContactInfo();
 		cInfoNueva.setEmail("algo@algo.com");
 		cInfoNueva.setTlfMovil("666 123 123");
 
+		//Asocio cInfoNueva a profe con PK =1, por lo que cInfoNueva debería adquirir
+		//al pasar a estado persistente PK =1
 		// Relación bidireccional
 		profe.addContactInfo(cInfoNueva);
 
 		try {
-			session.saveOrUpdate(cInfoNueva);
+			tx = session.beginTransaction();
 			session.saveOrUpdate(profe);
+			//Se detectan dos objetcos ContactInfo con id=1 => imposible porque es PK
+			session.saveOrUpdate(cInfoNueva);
 
 			tx.commit();
 		} catch (Exception ex) {
 			System.out.println("Ha ocurrido una excepción: " + ex.getMessage());
+			ex.printStackTrace();
 			if (tx != null) {
 				tx.rollback();
 			}
+			throw ex;
 		}
 	}
 
-	private static void addMoreThanOneContactInfoToProfesorFromContactInfo(Session session, int profeId) {
-		List<ContactInfo> infos =
-				// session.createQuery("SELECT p.contactInfos from Profesor p where p.id = :id")
-				session.createQuery("SELECT c from ContactInfo c where c.profesor.id = :id").setParameter("id", profeId)
-						.list();
-
-		ContactInfo cInfoNueva = new ContactInfo();
-		cInfoNueva.setEmail("algo2@algo.com");
-		cInfoNueva.setTlfMovil("666 123 123");
+	/*Lanzará una excepción
+	*Ha ocurrido una excepción: A different object with the same identifier value was already associated with the session : [modelo.ContactInfo#1]
+	org.hibernate.NonUniqueObjectException:
+	*/
+	private static void updateContactInfoToProfesor(Session session, int profeId) {
 		Transaction tx = null;
+
+		Profesor profe = (Profesor) session.createQuery("SELECT p FROM Profesor p where p.id = :id")
+				.setParameter("id", profeId).uniqueResult();
+
+		//info está asociado a la sesión con pk=1
+		ContactInfo info =  profe.getContactInfo();
+		if(info!=null) {
+			System.out.println("Profe: " + profe.getId() + " Contact info: " + info);
+		}
+		
+
+	
+		info.setEmail("algo@algo.com");
+		info.setTlfMovil("666 123 123");
+
+		profe.addContactInfo(info);
+
 		try {
-			for (ContactInfo contactInfo : infos) {
-				System.out.println("contact info: " + contactInfo + " profesor: " + contactInfo.getProfesor());
-				Profesor profe = contactInfo.getProfesor();
+			tx = session.beginTransaction();
+			session.saveOrUpdate(profe);
+			session.saveOrUpdate(info);
 
-				// Relación bidireccional
-				profe.addContactInfo(cInfoNueva);
-
-				tx = session.beginTransaction();
-				session.saveOrUpdate(cInfoNueva);
-				session.saveOrUpdate(profe);
-
-			}
 			tx.commit();
+			System.out.println("Se han actualizado correctamente");
 		} catch (Exception ex) {
 			System.out.println("Ha ocurrido una excepción: " + ex.getMessage());
+			ex.printStackTrace();
 			if (tx != null) {
 				tx.rollback();
 			}
+			throw ex;
 		}
-
 	}
+
+	
+	
 
 }

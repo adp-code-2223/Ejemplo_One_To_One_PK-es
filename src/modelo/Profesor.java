@@ -1,5 +1,5 @@
 package modelo;
-// Generated 31 ene 2023 11:04:06 by Hibernate Tools 5.6.14.Final
+// Generated 9 feb 2023 15:36:55 by Hibernate Tools 5.6.14.Final
 
 import java.util.HashSet;
 import java.util.Set;
@@ -9,20 +9,13 @@ import java.util.Set;
  */
 public class Profesor implements java.io.Serializable {
 
-	@Override
-	public String toString() {
-		return "Profesor [id=" + id + ", nombre=" + nombre + ", ape1=" + ape1 + ", ape2=" + ape2 + ", tipoFuncionario="
-				+ tipoFuncionario + "]";
-	}
-
 	private Integer id;
 	private String nombre;
 	private String ape1;
 	private String ape2;
 	private String tipoFuncionario;
+	private ContactInfo contactInfo;
 	private Set modulos = new HashSet(0);
-	private Set contactInfos = new HashSet(0);
-	
 
 	public Profesor() {
 	}
@@ -33,13 +26,12 @@ public class Profesor implements java.io.Serializable {
 		this.ape2 = ape2;
 	}
 
-	public Profesor(String nombre, String ape1, String ape2, String tipoFuncionario, Set modulos, Set contactInfos) {
+	public Profesor(String nombre, String ape1, String ape2, String tipoFuncionario, ContactInfo contactInfo) {
 		this.nombre = nombre;
 		this.ape1 = ape1;
 		this.ape2 = ape2;
 		this.tipoFuncionario = tipoFuncionario;
-		this.modulos = modulos;
-		this.contactInfos = contactInfos;
+		this.contactInfo = contactInfo;
 	}
 
 	public Integer getId() {
@@ -82,14 +74,14 @@ public class Profesor implements java.io.Serializable {
 		this.tipoFuncionario = tipoFuncionario;
 	}
 
-	public Set getModulos() {
-		return this.modulos;
+	public ContactInfo getContactInfo() {
+		return this.contactInfo;
 	}
 
-	public void setModulos(Set modulos) {
-		this.modulos = modulos;
+	public void setContactInfo(ContactInfo contactInfo) {
+		this.contactInfo = contactInfo;
 	}
-
+	
 	public void addModulo(Modulo mod) {
 
 		getModulos().add(mod);
@@ -101,24 +93,27 @@ public class Profesor implements java.io.Serializable {
 
 	}
 
-	public Set getContactInfos() {
-		return this.contactInfos;
+	public Set getModulos() {
+		return modulos;
 	}
 
-	public void setContactInfos(Set contactInfos) {
-		this.contactInfos = contactInfos;
+	public void setModulos(Set modulos) {
+		this.modulos = modulos;
+	}
+
+	@Override
+	public String toString() {
+		return "Profesor [id=" + id + ", nombre=" + nombre + ", ape1=" + ape1 + ", ape2=" + ape2 + ", tipoFuncionario="
+				+ tipoFuncionario + ", contactInfo=" + contactInfo + "]";
 	}
 	
 	public void addContactInfo(ContactInfo cInfo){
-		System.out.println("Antes de añadir: Profe con id: " + this.id + " tiene "
-				+ getContactInfos().size() + " infos de contacto");
+		this.setContactInfo(cInfo);
 
-		getContactInfos().add(cInfo);
-
-		System.out.println("Después de añadir: Profe con id: " + this.id + " tiene "
-				+ getContactInfos().size() + " infos de contacto");
-
+		
 		cInfo.setProfesor(this);
 	}
+	
+	
 
 }
