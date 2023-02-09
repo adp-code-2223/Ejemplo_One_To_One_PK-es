@@ -16,9 +16,7 @@ public class OneToOne {
 		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
 
-		 //addMoreThanOneContactInfoToProfesor(session, 1);
-
-		//updateContactInfoToProfesor(session, 1);
+		updateContactInfoToProfesor(session, 1);
 		session.close();
 		sessionFactory.close();
 
@@ -68,10 +66,7 @@ public class OneToOne {
 		}
 	}
 
-	/*Lanzará una excepción
-	*Ha ocurrido una excepción: A different object with the same identifier value was already associated with the session : [modelo.ContactInfo#1]
-	org.hibernate.NonUniqueObjectException:
-	*/
+	
 	private static void updateContactInfoToProfesor(Session session, int profeId) {
 		Transaction tx = null;
 
@@ -97,7 +92,7 @@ public class OneToOne {
 			session.saveOrUpdate(info);
 
 			tx.commit();
-			System.out.println("Se han actualizado correctamente");
+			System.out.println("Se ha actualizado correctamente");
 		} catch (Exception ex) {
 			System.out.println("Ha ocurrido una excepción: " + ex.getMessage());
 			ex.printStackTrace();
