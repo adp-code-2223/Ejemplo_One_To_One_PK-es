@@ -8,7 +8,8 @@
                 <param name="property">profesor</param>
             </generator>
         </id>
-        <one-to-one class="modelo.Profesor" constrained="true" name="profesor"/>
+        <one-to-one class="modelo.Profesor" 
+        constrained="true" name="profesor"/>
         <property name="email" type="string">
             <column name="email" not-null="true" unique="true"/>
         </property>

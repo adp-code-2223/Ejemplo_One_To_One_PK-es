@@ -15,7 +15,7 @@ public class OneToOne {
 
 		SessionFactory sessionFactory = SessionFactoryUtil.getSessionFactory();
 		Session session = sessionFactory.openSession();
-
+		//addNewContactInfoToProfesor(session, 1);
 		updateContactInfoToProfesor(session, 1);
 		session.close();
 		sessionFactory.close();
@@ -26,10 +26,12 @@ public class OneToOne {
 	*Ha ocurrido una excepción: A different object with the same identifier value was already associated with the session : [modelo.ContactInfo#1]
 	org.hibernate.NonUniqueObjectException:
 	*/
-	private static void addNewContactInfoToProfesor(Session session, int profeId) {
+	private static void addNewContactInfoToProfesor(Session session,
+			int profeId) {
 		Transaction tx = null;
 
-		Profesor profe = (Profesor) session.createQuery("SELECT p FROM Profesor p where p.id = :id")
+		Profesor profe = (Profesor) session.createQuery("SELECT p FROM Profesor"
+				+ " p where p.id = :id")
 				.setParameter("id", profeId).uniqueResult();
 
 		//info está asociado a la sesión con pk=1
@@ -84,11 +86,11 @@ public class OneToOne {
 		info.setEmail("algo@algo.com");
 		info.setTlfMovil("666 123 123");
 
-		profe.addContactInfo(info);
+		
 
 		try {
 			tx = session.beginTransaction();
-			session.saveOrUpdate(profe);
+			
 			session.saveOrUpdate(info);
 
 			tx.commit();
