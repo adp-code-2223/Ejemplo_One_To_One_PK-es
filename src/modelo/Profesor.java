@@ -21,6 +21,8 @@ public class Profesor implements java.io.Serializable {
 	private String ape2;
 	private String tipoFuncionario;
 	private Set modulos = new HashSet(0);
+	private Set contactInfos = new HashSet(0);
+	
 
 	public Profesor() {
 	}
@@ -31,12 +33,13 @@ public class Profesor implements java.io.Serializable {
 		this.ape2 = ape2;
 	}
 
-	public Profesor(String nombre, String ape1, String ape2, String tipoFuncionario, Set modulos) {
+	public Profesor(String nombre, String ape1, String ape2, String tipoFuncionario, Set modulos, Set contactInfos) {
 		this.nombre = nombre;
 		this.ape1 = ape1;
 		this.ape2 = ape2;
 		this.tipoFuncionario = tipoFuncionario;
 		this.modulos = modulos;
+		this.contactInfos = contactInfos;
 	}
 
 	public Integer getId() {
@@ -96,6 +99,14 @@ public class Profesor implements java.io.Serializable {
 
 		mod.getProfesors().add(this);
 
+	}
+
+	public Set getContactInfos() {
+		return this.contactInfos;
+	}
+
+	public void setContactInfos(Set contactInfos) {
+		this.contactInfos = contactInfos;
 	}
 
 }

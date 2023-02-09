@@ -6,18 +6,24 @@
 <!-- 		match-name="cicloformativo" /> -->
 
 
+<!-- 	<table-filter match-catalog="instituto" match-schema="dbo" -->
+<!-- 		match-name="comunidadAutonoma" /> -->
+<!-- 	<table-filter match-catalog="instituto" match-schema="dbo" -->
+<!-- 		match-name="direccion" /> -->
+<!-- 	<table-filter match-catalog="instituto" match-schema="dbo" -->
+<!-- 		match-name="modulo" /> -->
+
+<!-- 	<table-filter match-catalog="instituto" match-schema="dbo" -->
+<!-- 		match-name="profesormodulo" /> -->
+<!-- 	<table-filter match-catalog="instituto" match-schema="dbo" -->
+<!-- 		match-name="provincia" /> -->
+<!-- 	<table-filter match-catalog="instituto" match-schema="dbo" -->
+<!-- 		match-name="tiposbasicos" /> -->
+
+
 	<table-filter match-catalog="instituto" match-schema="dbo"
-		match-name="comunidadAutonoma" />
-	<table-filter match-catalog="instituto" match-schema="dbo"
-		match-name="direccion" />
-	<table-filter match-catalog="instituto" match-schema="dbo"
-		match-name="modulo" />
-	<table-filter match-catalog="instituto" match-schema="dbo"
-		match-name="profesor" />
-	<table-filter match-catalog="instituto" match-schema="dbo"
-		match-name="profesormodulo" />
-	<table-filter match-catalog="instituto" match-schema="dbo"
-		match-name="provincia" />
-	<table-filter match-catalog="instituto" match-schema="dbo"
-		match-name="tiposbasicos" />
+		match-name="contactInfo" />
+		
+		 	<table-filter match-catalog="instituto" match-schema="dbo" 
+		match-name="profesor" /> 
 </hibernate-reverse-engineering>
