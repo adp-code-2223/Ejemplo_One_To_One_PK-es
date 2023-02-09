@@ -36,6 +36,10 @@ REFERENCES [dbo].[profesor] ([Id])
 GO
 
 ALTER TABLE [dbo].[contactInfo] CHECK CONSTRAINT [FK_contactInfo_profesor]
+
+ALTER TABLE contactInfo
+ADD CONSTRAINT UC_contactInfo_UNIQUE_email UNIQUE(email)
+
 GO
 
 

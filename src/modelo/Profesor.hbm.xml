@@ -18,7 +18,7 @@
         <property name="tipoFuncionario" type="string">
             <column length="100" name="tipoFuncionario"/>
         </property>
-        <set fetch="select" inverse="true" lazy="true"
+        <set fetch="select" inverse="true" lazy="true" 
          name="contactInfos" table="contactInfo">
             <key>
                 <column name="profesorId" 

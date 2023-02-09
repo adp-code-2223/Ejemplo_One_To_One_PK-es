@@ -108,5 +108,17 @@ public class Profesor implements java.io.Serializable {
 	public void setContactInfos(Set contactInfos) {
 		this.contactInfos = contactInfos;
 	}
+	
+	public void addContactInfo(ContactInfo cInfo){
+		System.out.println("Antes de añadir: Profe con id: " + this.id + " tiene "
+				+ getContactInfos().size() + " infos de contacto");
+
+		getContactInfos().add(cInfo);
+
+		System.out.println("Después de añadir: Profe con id: " + this.id + " tiene "
+				+ getContactInfos().size() + " infos de contacto");
+
+		cInfo.setProfesor(this);
+	}
 
 }
