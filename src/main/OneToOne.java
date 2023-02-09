@@ -86,11 +86,11 @@ public class OneToOne {
 		info.setEmail("algo@algo.com");
 		info.setTlfMovil("666 123 123");
 
-		
+		//profe.addContactInfo(info);
 
 		try {
 			tx = session.beginTransaction();
-			
+			//session.saveOrUpdate(profe);
 			session.saveOrUpdate(info);
 
 			tx.commit();
